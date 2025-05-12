@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/servidores')
+fetch('https://misty-bot.onrender.com/servidores')
   .then(res => res.json())
   .then(servidores => {
     const container = document.getElementById('server-track');
