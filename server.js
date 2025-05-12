@@ -76,9 +76,9 @@ app.get('/auth/discord/callback', async (req, res) => {
       avatar: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
     };
 
-    res.redirect('https://misty-bot.onrender.com/dashboard.html');
+    res.redirect('/dashboard.html');
   } catch (err) {
-    res.redirect('https://misty-bot.onrender.com/erro.html');
+    res.redirect('/erro.html');
   }
 });
 
