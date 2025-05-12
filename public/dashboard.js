@@ -13,7 +13,7 @@ fetch('/api/user')
     console.error('Erro ao carregar os dados do usuário:', error);
     // Tratamento de erro, caso não consiga carregar os dados
     document.getElementById('username').innerHTML = `
-    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com&scope=identify+email"
+    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com%2Fdashboard.html&scope=identify+email"
         class="login-fallback" >
       <i class="fa-solid fa-right-to-bracket"></i> Fazer login
     </a>`;
