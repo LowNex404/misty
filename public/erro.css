@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #16161a;
+  color: white;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -10%;
+    left: 0%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #f1f163 0%, transparent 75%);
+    filter: blur(100px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: floatGlow 10s ease-in-out infinite alternate;
+  }
+  
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: 20%;
+    right: 15%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, #7f5af0 0%, transparent 90%);
+    filter: blur(100px);
+    opacity: 0.3;
+    z-index: -1;
+    animation: floatGlow2 12s ease-in-out infinite alternate;
+  }
+  
+  @keyframes floatGlow {
+    0% { transform: translateY(0px) translateX(0px); }
+    100% { transform: translateY(-120px) translateX(80px); }
+  }
+  
+  @keyframes floatGlow2 {
+    0% { transform: translateY(0px) translateX(0px); }
+    100% { transform: translateY(80px) translateX(-60px); }
+  }
+
+
+
+.buttons .btn {
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    margin: 10px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 2px solid #fdfd96;
+    color: #fdfd96;
+    text-decoration: none;
+    transition: 0.5s ease;
+    box-shadow: 0 0 10px #ffffa4;
+  }
+  
+  .buttons .btn:hover {
+    border: 2px solid #7f5af0;
+    box-shadow: 0 0 15px #7f5af0;
+    color: #7f5af0;
+    transform: scale(1.05);
+  }
+
+  .container {
+    width: 100%;
+    height: 100dvh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .img {
+    width:650px;
+  }
+
+
+  @media (max-width: 768px) {
+    .img {
+        width:300px;
+         }
+  }
+
+  h3 {
+    padding: 5px;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+  }

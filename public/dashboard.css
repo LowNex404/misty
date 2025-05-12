@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #16161a;
+    color: white;
+    display: flex;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  
+  h2 {
+    color: #fdfd96;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1f22;
+    padding: 10px;
+    width: 80px;
+    align-items: center;
+    gap: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s;
+  }
+  
+ 
+  .sidebar button.active {
+    color: #fdfd96;
+  }
+  .sidebar button:hover {
+    transform: rotate(10deg);
+    scale:1.1;
+  }
+  
+  .topbar {
+    position: fixed;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .profile-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+  
+  /* Avatar */
+  .avatar-wrapper {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 10; /* Garante que o avatar fique acima de outros elementos */
+  }
+
+  .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+     
+    @media (max-width: 768px) {
+      .avatar-wrapper {
+        width: 45px;
+        height: 45px;
+      }
+    
+      .avatar-wrapper img {
+        object-fit: cover;
+      }
+  
+      h2 {
+          font-size: 20px;
+        }
+      body {
+          font-size: 14px;
+      }
+    }
+    
+    main#content {
+    top: 90px;
+    position: fixed;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 80px; /* compensa a sidebar no desktop */
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    main#content {
+      padding-left: 0;
+      padding-bottom: 60px; /* compensa a barra inferior no mobile */
+    }
+  }
+
+  span {
+  color: #fdfd96;
+  }
+  
+  .page {
+    display: none;
+  }
+  
+  .page.active {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  
+  /* Mobile: sidebar vira barra inferior */
+  @media (max-width: 768px) {
+    .sidebar {
+      flex-direction: row;
+      width: 100%;
+      height: 60px;
+      bottom: 0;
+      top: unset;
+      justify-content: space-around;
+    }
+  
+    .topbar {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    main#content {
+      margin-left: 0;
+      margin-bottom: 60px;
+    }
+  }
+  
+  .login-fallback {
+    color: inherit;
+    text-decoration: none;
+    transition: 0.2s ease;
+  }
+
+  .login-fallback:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+

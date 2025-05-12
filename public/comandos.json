@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Ping",
+        "categoria": "Utilidade",
+        "uso": "z.ping",
+        "aliases": ["ms"],
+        "descricao": "Retorna o tempo de resposta do bot."
+    },
+    {
+        "nome": "Botinfo",
+        "categoria": "Utilidade",
+        "uso": "z.botinfo",
+        "aliases": ["bi"],
+        "descricao": "Retorna as informações do bot."
+    },
+    {
+        "nome": "Gerenciar",
+        "categoria": "Moderação",
+        "uso": "z.manage {@usuário}",
+        "aliases": ["gerenciar"],
+        "descricao": "Gerencia um usuário mencionado, podendo banir, expulsar, mutar/desmutar e dar um aviso."
+    },
+    {
+        "nome": "Prefixo",
+        "categoria": "Moderação",
+        "uso": "z.prefixo {prefixo}",
+        "aliases": ["prefix", "setprefix"],
+        "descricao": "Defina o prefixo do servidor."
+    },
+    {
+        "nome": "Perfil",
+        "categoria": "Utilidade",
+        "uso": "z.perfil <@usuário>",
+        "aliases": ["bio"],
+        "descricao": "Veja seu perfil, ou de um usuário mencionado."
+    },
+    {
+        "nome": "Setbio",
+        "categoria": "Utilidade",
+        "uso": "z.setbio {texto}",
+        "aliases": ["bio"],
+        "descricao": "Defina um bio para o seu perfil."
+    },
+    {
+        "nome": "Tempo em Call",
+        "categoria": "Utilidade",
+        "uso": "z.tempcall <@usuário>",
+        "aliases": ["calltime", "tc"],
+        "descricao": "Veja as informações do tempo em chat de voz."
+    },
+    {
+        "nome": "Resetar Call",
+        "categoria": "Moderação",
+        "uso": "z.resetcall {@usuário or server}",
+        "aliases": ["Não Possui"],
+        "descricao": "Resete as informações do tempo em chat de voz do usuário ou do servidor inteiro."
+    },
+    {
+        "nome": "Ranking - Call",
+        "categoria": "Utilidade",
+        "uso": "z.rankcall",
+        "aliases": ["ranking-call", "leaderboard-call", "clb"],
+        "descricao": "Veja os usuários com maior tempo em call do servidor."
+    },
+    {
+        "nome": "Mensagens",
+        "categoria": "Utilidade",
+        "uso": "z.msg <@usuário>",
+        "aliases": ["message", "mensagem"],
+        "descricao": "Veja as informações de mensagens."
+    },
+    {
+        "nome": "Ranking - Msg",
+        "categoria": "Utilidade",
+        "uso": "z.rankmsg",
+        "aliases": ["ranking-msg", "leaderboard-msg", "mlb"],
+        "descricao": "Veja os usuários com mais mensagens do servidor."
+    },
+    {
+        "nome": "Resetar Msg",
+        "categoria": "Moderação",
+        "uso": "z.resetmsg {@usuário or server}",
+        "aliases": ["Não Possui"],
+        "descricao": "Resete as informações de mensagens do usuário ou do servidor inteiro."
+    },
+    {
+        "nome": "Daily",
+        "categoria": "Economia",
+        "uso": "z.daily",
+        "aliases": ["Não Possui"],
+        "descricao": "Colete sua recompensa diária."
+    },
+    {
+        "nome": "Saldo",
+        "categoria": "Economia",
+        "uso": "z.saldo <@usuário>",
+        "aliases": ["atm","bal","cookies","carteira"],
+        "descricao": "Veja o saldo."
+    },
+    {
+        "nome": "Ranking - Cookies",
+        "categoria": "Economia",
+        "uso": "z.rank",
+        "aliases": ["ranking", "leaderboard", "lb"],
+        "descricao": "Veja os usuários mais ricos."
+    },
+    {
+        "nome": "Pagar",
+        "categoria": "Economia",
+        "uso": "z.pay {@usuário} {valor}",
+        "aliases": ["pagar"],
+        "descricao": "Envie cookies para outro usuário."
+    },
+    {
+        "nome": "Transações",
+        "categoria": "Economia",
+        "uso": "z.transações <@usuário>",
+        "aliases": ["transação","tr"],
+        "descricao": "Veja as 10 últimas transações."
+    }
+  ]
+  
