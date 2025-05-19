@@ -13,7 +13,7 @@ fetch('/api/user')
     console.error('Erro ao carregar os dados do usuário:', error);
     // Tratamento de erro, caso não consiga carregar os dados
     document.getElementById('username').innerHTML = `
-    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com&scope=identify+email"
+    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
         class="login-fallback" >
       <i class="fa-solid fa-right-to-bracket"></i> Fazer login
     </a>`;
@@ -46,4 +46,61 @@ document.querySelectorAll('.sidebar button').forEach(btn => {
   });
 
 
+const isLoggedIn = window.user !== undefined; // Supondo que você tenha algo como window.user = {...} vindo do backend
+
+document.querySelectorAll('.produto-card').forEach(card => {
+  card.addEventListener('click', () => {
+    explodeCookies(card);
+    
+    const cookies = card.dataset.cookies;
+    const preco = card.dataset.preco;
+
+    if (!isLoggedIn) {
+      showLoginPopup();
+    } else {
+      showConfirmPopup(cookies, preco);
+    }
+  });
+});
+
+function explodeCookies(element) {
+  for (let i = 0; i < 20; i++) {
+    const cookie = document.createElement('div');
+    cookie.className = 'cookie';
+    cookie.textContent = '🍪';
+    cookie.style.left = `${element.offsetLeft + element.offsetWidth / 2}px`;
+    cookie.style.top = `${element.offsetTop + element.offsetHeight / 2}px`;
+    cookie.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`);
+    cookie.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`);
+    document.body.appendChild(cookie);
+    setTimeout(() => cookie.remove(), 1000);
+  }
+}
+
+function showLoginPopup() {
+  document.getElementById("popup-login").classList.remove("hidden");
+}
+
+function showConfirmPopup(cookies, preco) {
+  document.getElementById("user-id").textContent = user.id;
+  document.getElementById("user-name").textContent = user.username;
+  document.getElementById("user-saldo").textContent = user.saldo || 0;
   
+  document.getElementById("popup-confirmar").classList.remove("hidden");
+
+  document.getElementById("btn-confirmar").onclick = () => {
+    // Aqui você chama o backend para gerar o link de pagamento
+    fetch("/api/comprar", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ userId: user.id, cookies: cookies, preco: preco })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.pagamento_url) {
+        window.location.href = data.pagamento_url;
+      }
+    });
+  };
+}
+
