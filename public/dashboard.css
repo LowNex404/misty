@@ -177,3 +177,132 @@
     text-decoration: underline;
   }
 
+.produto-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.produto-card {
+  background: #1e1f22;
+  width: 180px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+  transition: 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.produto-card:hover {
+  transform: scale(1.05);
+  border: 2px solid #fdfd96b4;
+  box-shadow: 0px 0px 15px #fdfd9670;
+}
+
+.card-top {
+  color: white;
+  font-size: 14px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+}
+
+.card-middle {
+  font-size: 28px;
+  color: white;
+  margin-top: 10px;
+}
+
+.card-middle .unidade {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.card-bottom {
+  font-size: 20px;
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.cookie-icon {
+  width: 40px;
+  height: 40px;
+  background-image: url('img/cookie.png'); /* Coloque aqui o caminho da imagem */
+  background-size: cover;
+  position: absolute;
+}
+
+.cookie-icon.top-left {
+  top: -10px;
+  left: -10px;
+}
+
+.cookie-icon.bottom-right {
+  bottom: -10px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+}
+
+
+.cookie {
+  position: absolute;
+  font-size: 24px;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.popup.hidden { display: none; }
+.popup-content {
+  background: #1e1f22;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.btn {
+    background: transparent;
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    margin: 10px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 2px solid #fdfd96;
+    color: #fdfd96;
+    text-decoration: none;
+    transition: 0.5s ease;
+    box-shadow: 0 0 10px #ffffa4;
+  }
+  
+  .btn:hover {
+    border: 2px solid #7f5af0;
+    box-shadow: 0 0 15px #7f5af0;
+    color: #7f5af0;
+    transform: scale(1.05);
+  }
