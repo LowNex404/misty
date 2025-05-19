@@ -117,6 +117,20 @@
         "uso": "z.transações <@usuário>",
         "aliases": ["transação","tr"],
         "descricao": "Veja as 10 últimas transações."
+    },
+    {
+        "nome": "Loja de Banners",
+        "categoria": "Utilidade",
+        "uso": "z.loja",
+        "aliases": ["banner","banners"],
+        "descricao": "Compre banners pro seu perfil."
+    },
+    {
+        "nome": "Blackjack",
+        "categoria": "Economia",
+        "uso": "z.blackjack {valor}",
+        "aliases": ["bj"],
+        "descricao": "Aposte cookies no blackjack."
     }
   ]
   
