@@ -46,12 +46,43 @@ document.querySelectorAll('.sidebar button').forEach(btn => {
   });
 
 
-const isLoggedIn = window.user !== undefined; // Supondo que você tenha algo como window.user = {...} vindo do backend
+let user = null; // Variável global que armazenará os dados do usuário
+let isLoggedIn = false; // Inicialmente falso
 
+// Requisição para verificar se o usuário está logado
+fetch('/api/user')
+  .then(res => {
+    if (!res.ok) throw new Error('Usuário não autenticado');
+    return res.json();
+  })
+  .then(data => {
+    user = data;
+    isLoggedIn = true;
+
+    // Preencher dados visuais
+    document.getElementById('username').textContent = data.username || 'Nome não disponível';
+    document.getElementById('avatar').src = data.avatar || 'default-avatar.jpg';
+    document.getElementById('balance').textContent = data.balance || '0';
+    document.getElementById('level').textContent = data.level || '1';
+    document.getElementById('xp').textContent = `${data.xp || 0}/100`;
+  })
+  .catch(error => {
+    console.warn('Usuário não logado:', error);
+
+    // Tratamento visual para usuário deslogado
+    document.getElementById('username').innerHTML = `
+      <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
+          class="login-fallback" >
+        <i class="fa-solid fa-right-to-bracket"></i> Fazer login
+      </a>`;
+    document.getElementById('avatar').src = 'img/default-avatar.jpg';
+  });
+
+// Evento de clique nos cards
 document.querySelectorAll('.produto-card').forEach(card => {
   card.addEventListener('click', () => {
     explodeCookies(card);
-    
+
     const cookies = card.dataset.cookies;
     const preco = card.dataset.preco;
 
@@ -85,11 +116,10 @@ function showConfirmPopup(cookies, preco) {
   document.getElementById("user-id").textContent = user.id;
   document.getElementById("user-name").textContent = user.username;
   document.getElementById("user-saldo").textContent = user.saldo || 0;
-  
+
   document.getElementById("popup-confirmar").classList.remove("hidden");
 
   document.getElementById("btn-confirmar").onclick = () => {
-    // Aqui você chama o backend para gerar o link de pagamento
     fetch("/api/comprar", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
