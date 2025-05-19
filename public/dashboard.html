@@ -97,9 +97,9 @@
 <!-- Popup de login -->
 <div id="popup-login" class="popup hidden">
   <div class="popup-content">
-    <p>Você precisa estar logado para comprar cookies.</p>
+    <p>Você precisa estar logado na sua conta discord para comprar cookies.</p>
     <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email">
-      <button class="btn">Entrar com Discord</button>
+      <button class="btn">Login</button>
     </a>
   </div>
 </div>
@@ -107,11 +107,12 @@
 <!-- Popup de confirmação -->
 <div id="popup-confirmar" class="popup hidden">
   <div class="popup-content">
-    <p><strong>ID:</strong> <span id="user-id"></span></p>
+    <p>Comfirme suas informações:</p><br>
     <p><strong>Usuário:</strong> <span id="user-name"></span></p>
+    <p><strong>ID:</strong> <span id="user-id"></span></p>
     <p><strong>Saldo:</strong> <span id="user-saldo"></span> cookies</p>
-    <p><a href="/termos.html" target="_blank">Leia os Termos de Uso</a></p>
-    <button class="btn"id="btn-confirmar">Prosseguir Compra</button>
+    <p><a style="color: dimgray;" href="/termos.html" target="_blank">Leia os Termos de Uso</a></p>
+    <button class="btn"id="btn-confirmar">Prosseguir</button>
   </div>
 </div>
 
