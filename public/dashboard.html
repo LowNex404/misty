@@ -55,10 +55,66 @@
       <h2>Configuração</h2>
       <p>O bot ainda não possui comandos configuravéis!</p>
     </section>
+
     <section id="loja" class="page">
-      <h2>Loja</h2>
-      <p>Nossa equipe está trabalhando na loja, em breve terá itens incrivéis para que possa gastar seus cookies!</p>
+    <h2>Loja</h2>
+    <div id="produtos" class="produto-container">
+   <div class="produto-container">
+  <div class="produto-card" data-cookies="100000" data-preco="2.49">
+    <div class="card-top">PACOTE</div>
+    <div class="card-middle">100k<br><span class="unidade">Cookies</span></div>
+    <div class="card-bottom">R$2,49</div>
+    <div class="cookie-icon top-left"></div>
+    <div class="cookie-icon bottom-right"></div>
+  </div>
+
+  <div class="produto-card" data-cookies="250000" data-preco="4.89">
+    <div class="card-top">CAIXA</div>
+    <div class="card-middle">250k<br><span class="unidade">Cookies</span></div>
+    <div class="card-bottom">R$4,89</div>
+    <div class="cookie-icon top-left"></div>
+    <div class="cookie-icon bottom-right"></div>
+  </div>
+
+  <div class="produto-card" data-cookies="500000" data-preco="8.99">
+    <div class="card-top">CARREGAMENTO</div>
+    <div class="card-middle">500k<br><span class="unidade">Cookies</span></div>
+    <div class="card-bottom">R$8,99</div>
+    <div class="cookie-icon top-left"></div>
+    <div class="cookie-icon bottom-right"></div>
+  </div>
+
+  <div class="produto-card" data-cookies="1000000" data-preco="17.49">
+    <div class="card-top">CAMINHÃO</div>
+    <div class="card-middle">1M<br><span class="unidade">Cookies</span></div>
+    <div class="card-bottom">R$17,49</div>
+    <div class="cookie-icon top-left"></div>
+    <div class="cookie-icon bottom-right"></div>
+  </div>
+</div>
+
     </section>
+<!-- Popup de login -->
+<div id="popup-login" class="popup hidden">
+  <div class="popup-content">
+    <p>Você precisa estar logado para comprar cookies.</p>
+    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email">
+      <button class="btn">Entrar com Discord</button>
+    </a>
+  </div>
+</div>
+
+<!-- Popup de confirmação -->
+<div id="popup-confirmar" class="popup hidden">
+  <div class="popup-content">
+    <p><strong>ID:</strong> <span id="user-id"></span></p>
+    <p><strong>Usuário:</strong> <span id="user-name"></span></p>
+    <p><strong>Saldo:</strong> <span id="user-saldo"></span> cookies</p>
+    <p><a href="/termos.html" target="_blank">Leia os Termos de Uso</a></p>
+    <button class="btn"id="btn-confirmar">Prosseguir Compra</button>
+  </div>
+</div>
+
     <section id="presente" class="page">
       <h2>Recompensas</h2>
       <p>Ainda não há nenhuma recompensa para coletar!</p>
