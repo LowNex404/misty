@@ -8,8 +8,8 @@ fetch('/api/user')
       user = data; // Agora os dados estão acessíveis globalmente
 
       // Preenche os dados na interface principal
-      document.getElementById('username').textContent = user.username || 'Sem Nome';
-      document.getElementById('avatar').src = user.avatar || 'default-avatar.jpg';
+      document.getElementById('username').textContent = data.username || 'Sem Nome';
+      document.getElementById('avatar').src = data.avatar || 'default-avatar.jpg';
       document.getElementById('balance').textContent = user.balance || '0';
       document.getElementById('level').textContent = user.level || '1';
       document.getElementById('xp').textContent = `${user.xp || 0}/100`;
