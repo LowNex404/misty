@@ -123,6 +123,20 @@
     <button class="btn" id="btn-confirmar">Prosseguir</button>
   </div>
 </div>
+  
+<div id="popup-pagamento" class="popup hidden">
+  <div class="popup-card">
+    <button class="close-btn" onclick="fecharPopup()">×</button>
+    <h2>Pagamento via PIX</h2>
+    <p><strong>Valor:</strong> R$ <span id="valor-pagamento"></span></p>
+    <p><strong>Tempo restante:</strong> <span id="tempo-restante"></span></p>
+    <p><strong>Status:</strong> <span id="status-pagamento">Aguardando pagamento...</span></p>
+    <img id="qr-code" src="" alt="QR Code para pagamento">
+    <p><strong>Copia e Cola:</strong></p>
+    <input type="text" id="codigo-pix" readonly>
+    <button onclick="copiarCodigo()">Copiar</button>
+  </div>
+</div>
 
 
   <script src="dashboard.js"></script>
