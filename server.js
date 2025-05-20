@@ -124,14 +124,15 @@ app.use(bodyParser.json());
 // 1. Rota para gerar o QR Code Pix
 app.post('/criar-pagamento', async (req, res) => {
   try {
-    const { nomeCliente, valor } = req.body;
+    const { amount, description, expiresIn } = req.body;
 
     const response = await axios.post(
       'https://api.abacatepay.com/v1/pixQrCode',
       {
-        nome: nomeCliente,
-        valor: valor,
+        valor: amount,
+        nome: description,
         id: `pedido-${Date.now()}`,
+        expiresIn: expiresIn
       },
       {
         headers: {
@@ -141,12 +142,13 @@ app.post('/criar-pagamento', async (req, res) => {
       }
     );
 
-    res.json(response.data); // Retorna o QR Code para o frontend
-  } catch (error) {
-    console.error('Erro ao gerar pagamento:', error.response?.data || error.message);
-    res.status(500).json({ erro: 'Erro ao gerar pagamento' });
+    return res.json(response.data);
+  } catch (erro) {
+    console.error("Erro ao gerar pagamento:", erro.response?.data || erro.message);
+    res.status(500).json({ erro: "Erro ao gerar pagamento" });
   }
 });
+
 
 // Listen
 const PORT = process.env.PORT || 3000;
