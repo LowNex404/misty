@@ -1,5 +1,5 @@
 
-fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
+fetch('/api/user')   // <‑‑ manda o cookie
   .then(res => {
     if (!res.ok) throw new Error('401');
     return res.json();
