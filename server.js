@@ -148,13 +148,6 @@ app.post('/criar-pagamento', async (req, res) => {
   }
 });
 
-// Iniciar o servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Backend rodando na porta ${PORT}`);
-});
-
-
 // Listen
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando em https://misty-bot.onrender.com`));
