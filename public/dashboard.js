@@ -79,11 +79,10 @@ function showConfirmPopup(cookies, preco) {
 
   document.getElementById("popup-confirmar").classList.remove("hidden");
 
-  document.getElementById("btn-confirmar").onclick = () => {
+  document.getElementById("btn-confirmar").onclick = async () => {
     try {
-    const resposta = await fetch("https://misty-bot.onrender.com//criar-pagamento", {
-
-    const dados = await resposta.json();
+    const resposta = await fetch("https://misty-bot.onrender.com/criar-pagamento", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -108,6 +107,7 @@ function showConfirmPopup(cookies, preco) {
     console.error("Erro ao criar pagamento:", err);
   }
 };
+}
 
 function monitorarStatusPagamento(id) {
   const intervalo = setInterval(() => {
