@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const axios = require('axios');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 const User = require('./models/user');
@@ -115,6 +117,46 @@ app.get('/api/user', ensureAuthenticated, async (req, res) => {
     res.status(500).json({ message: 'Erro interno do servidor' });
   }
 });
+
+const app = express();
+app.use(cors()); // Libera para seu frontend se precisar
+app.use(bodyParser.json());
+
+const ABACATEPAY_API_KEY = 'SUA_CHAVE_AQUI'; // NUNCA coloque isso no frontend!
+
+// 1. Rota para gerar o QR Code Pix
+app.post('/criar-pagamento', async (req, res) => {
+  try {
+    const { nomeCliente, valor } = req.body;
+
+    const response = await axios.post(
+      'https://api.abacatepay.com/v1/pixQrCode',
+      {
+        nome: nomeCliente,
+        valor: valor,
+        id: `pedido-${Date.now()}`,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.ABACATEPAY_API_KEY}`,
+        }
+      }
+    );
+
+    res.json(response.data); // Retorna o QR Code para o frontend
+  } catch (error) {
+    console.error('Erro ao gerar pagamento:', error.response?.data || error.message);
+    res.status(500).json({ erro: 'Erro ao gerar pagamento' });
+  }
+});
+
+// Iniciar o servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Backend rodando na porta ${PORT}`);
+});
+
 
 // Listen
 const PORT = process.env.PORT || 3000;
