@@ -122,8 +122,6 @@ const app = express();
 app.use(cors()); // Libera para seu frontend se precisar
 app.use(bodyParser.json());
 
-const ABACATEPAY_API_KEY = 'SUA_CHAVE_AQUI'; // NUNCA coloque isso no frontend!
-
 // 1. Rota para gerar o QR Code Pix
 app.post('/criar-pagamento', async (req, res) => {
   try {
