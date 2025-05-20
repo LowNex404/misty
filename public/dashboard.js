@@ -1,32 +1,28 @@
 let user = null; // Variável global para guardar os dados do usuário
 
-// Ao carregar os dados do usuário
+// Fazendo a requisição para o endpoint que retorna os dados do usuário
 fetch('/api/user')
   .then(res => res.json())
   .then(data => {
-    if (data && data.userId) {
-      user = data; // Agora os dados estão acessíveis globalmente
-
-      // Preenche os dados na interface principal
-      document.getElementById('username').textContent = data.username || 'Sem Nome';
-      document.getElementById('avatar').src = data.avatar || 'default-avatar.jpg';
-      document.getElementById('balance').textContent = user.balance || '0';
-      document.getElementById('level').textContent = user.level || '1';
-      document.getElementById('xp').textContent = `${user.xp || 0}/100`;
-    } else {
-      throw new Error('Usuário não logado ou dados incompletos');
-    }
+    // Preenche os elementos com os dados do usuário
+    document.getElementById('username').textContent = data.username || 'Nome não disponível';
+    document.getElementById('avatar').src = data.avatar || 'default-avatar.jpg';  // Imagem padrão caso falte avatar
+    document.getElementById('balance').textContent = data.balance || '0';
+    document.getElementById('level').textContent = data.level || '1';
+    document.getElementById('xp').textContent = ${data.xp || 0}/100;
   })
   .catch(error => {
     console.error('Erro ao carregar os dados do usuário:', error);
-    // Exibe opção de login
-    document.getElementById('username').innerHTML = `
-      <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
-          class="login-fallback" >
-        <i class="fa-solid fa-right-to-bracket"></i> Fazer login
-      </a>`;
+    // Tratamento de erro, caso não consiga carregar os dados
+    document.getElementById('username').innerHTML = 
+    <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
+        class="login-fallback" >
+      <i class="fa-solid fa-right-to-bracket"></i> Fazer login
+    </a>;
     document.getElementById('avatar').src = 'img/default-avatar.jpg';
   });
+
+user = data; // Agora os dados estão acessíveis globalmente
 
 // Troca de página
 document.querySelectorAll('.sidebar button').forEach(btn => {
