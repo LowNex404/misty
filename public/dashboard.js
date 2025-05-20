@@ -80,26 +80,22 @@ function showConfirmPopup(cookies, preco) {
   document.getElementById("popup-confirmar").classList.remove("hidden");
 
   document.getElementById("btn-confirmar").onclick = () => {
-    fetch("https://api.abacatepay.com/v1/pixQrCode", {
-      method: "POST",
+    try {
+    const resposta = await fetch("https://misty-bot.onrender.com//criar-pagamento", {
+
+    const dados = await resposta.json();
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer SEU_TOKEN"
       },
       body: JSON.stringify({
         amount: preco,
         description: "Compra de cookies",
         expiresIn: 600
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      exibirPopupPagamento(data.data);
     });
-  };
-}
+  const dados = await resposta.json();
 
-function exibirPopupPagamento(data) {
+   
   document.getElementById("valor-pagamento").textContent = data.amount.toFixed(2);
   document.getElementById("qr-code").src = data.qrcode_image_url;
   document.getElementById("codigo-pix").value = data.brcode;
@@ -107,7 +103,11 @@ function exibirPopupPagamento(data) {
 
   iniciarContagemRegressiva(new Date(data.expires_at));
   monitorarStatusPagamento(data.id);
-}
+
+  } catch (err) {
+    console.error("Erro ao criar pagamento:", err);
+  }
+};
 
 function monitorarStatusPagamento(id) {
   const intervalo = setInterval(() => {
