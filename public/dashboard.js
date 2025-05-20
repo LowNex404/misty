@@ -1,6 +1,6 @@
-
-fetch('/api/user')   // <‑‑ manda o cookie
+fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
   .then(res => {
+    console.log('res.ok:', res.ok); // <- adicionado
     if (!res.ok) throw new Error('401');
     return res.json();
   })
@@ -15,14 +15,14 @@ fetch('/api/user')   // <‑‑ manda o cookie
     document.getElementById('xp').textContent        = `${user.xp}/100`;
   })
   .catch(() => {
+     console.error('Erro na requisição:', err);
     document.getElementById('username').innerHTML =
-      `<a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email" 
+      `<a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.netlify.app%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
           class="login-fallback" >
         <i class="fa-solid fa-right-to-bracket"></i> Fazer login
       </a>`;
     document.getElementById('avatar').src = 'img/default-avatar.jpg';
   });
-
 
 // Troca de página
 document.querySelectorAll('.sidebar button').forEach(btn => {
