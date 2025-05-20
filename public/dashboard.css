@@ -306,3 +306,32 @@
     color: #7f5af0;
     transform: scale(1.05);
   }
+   @media (max-width: 768px) {
+    .produto-container {
+  padding: 5px;
+}
+  .produto-card {
+  width: 40%;
+  height: 250px;
+}
+
+.cookie-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url('img/cookie.png'); /* Coloque aqui o caminho da imagem */
+  background-size: cover;
+  position: absolute;
+}
+
+.cookie-icon.top-left {
+  top: -10px;
+  left: -10px;
+}
+
+.cookie-icon.bottom-right {
+  bottom: -10px;
+  right: -25px;
+  width: 50px;
+  height: 50px;
+}
+   }
