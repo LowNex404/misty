@@ -118,7 +118,6 @@ app.get('/api/user', ensureAuthenticated, async (req, res) => {
   }
 });
 
-const app = express();
 app.use(cors()); // Libera para seu frontend se precisar
 app.use(bodyParser.json());
 
