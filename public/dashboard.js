@@ -1,5 +1,3 @@
-let user;
-
 // Carregar dados do usuário
 fetch('/api/user', { credentials: 'include' }) // envia o cookie
   .then(res => {
