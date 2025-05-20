@@ -1,26 +1,29 @@
-fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
+let user;
+
+// Carregar dados do usuário
+fetch('/api/user', { credentials: 'include' }) // envia o cookie
   .then(res => {
-    console.log('res.ok:', res.ok); // <- adicionado
+    console.log('res.ok:', res.ok);
     if (!res.ok) throw new Error('401');
     return res.json();
   })
   .then(data => {
     console.log('Dados recebidos:', data);
-     user = data;
+    user = data;
 
     document.getElementById('username').textContent = user.username;
-    document.getElementById('avatar').src            = user.avatar;
-    document.getElementById('balance').textContent   = user.balance;
-    document.getElementById('level').textContent     = user.level;
-    document.getElementById('xp').textContent        = ${user.xp}/100;
+    document.getElementById('avatar').src = user.avatar;
+    document.getElementById('balance').textContent = user.balance;
+    document.getElementById('level').textContent = user.level;
+    document.getElementById('xp').textContent = `${user.xp}/100`;
   })
-  .catch(() => {
-     console.error('Erro na requisição:', err);
-    document.getElementById('username').innerHTML =
+  .catch(err => {
+    console.error('Erro na requisição:', err);
+    document.getElementById('username').innerHTML = `
       <a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.netlify.app%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
-          class="login-fallback" >
+        class="login-fallback">
         <i class="fa-solid fa-right-to-bracket"></i> Fazer login
-      </a>;
+      </a>`;
     document.getElementById('avatar').src = 'img/default-avatar.jpg';
   });
 
@@ -56,10 +59,10 @@ function explodeCookies(element) {
     const cookie = document.createElement('div');
     cookie.className = 'cookie';
     cookie.textContent = '🍪';
-    cookie.style.left = ${element.offsetLeft + element.offsetWidth / 2}px;
-    cookie.style.top = ${element.offsetTop + element.offsetHeight / 2}px;
-    cookie.style.setProperty('--x', ${(Math.random() - 0.5) * 300}px);
-    cookie.style.setProperty('--y', ${(Math.random() - 0.5) * 300}px);
+    cookie.style.left = `${element.offsetLeft + element.offsetWidth / 2}px`;
+    cookie.style.top = `${element.offsetTop + element.offsetHeight / 2}px`;
+    cookie.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`);
+    cookie.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`);
     document.body.appendChild(cookie);
     setTimeout(() => cookie.remove(), 1000);
   }
@@ -70,35 +73,34 @@ function showLoginPopup() {
 }
 
 function showConfirmPopup(cookies, preco) {
-  // Verifica se user está definido e popula os dados
   if (!user) return;
 
   document.getElementById("user-id").textContent = user.userId;
   document.getElementById("user-name").textContent = user.username;
-  document.getElementById("user-saldo").textContent = user.balance.toLocaleString()|| 0;
+  document.getElementById("user-saldo").textContent = user.balance.toLocaleString() || 0;
 
   document.getElementById("popup-confirmar").classList.remove("hidden");
 
   document.getElementById("btn-confirmar").onclick = () => {
     fetch("https://api.abacatepay.com/v1/pixQrCode", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer SEU_TOKEN"
-  },
-  body: JSON.stringify({
-    amount: preco,
-    description: "Compra de cookies",
-    expiresIn: 600 // Tempo de expiração em segundos (10 minutos)
-  })
-})
-.then(res => res.json())
-.then(data => {
-  const { id, qrcode_image_url, brcode, amount, expires_at } = data.data;
-  // Exibir o popup com as informações recebidas
-});
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer SEU_TOKEN"
+      },
+      body: JSON.stringify({
+        amount: preco,
+        description: "Compra de cookies",
+        expiresIn: 600
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      exibirPopupPagamento(data.data);
+    });
+  };
 }
-  
+
 function exibirPopupPagamento(data) {
   document.getElementById("valor-pagamento").textContent = data.amount.toFixed(2);
   document.getElementById("qr-code").src = data.qrcode_image_url;
@@ -108,6 +110,7 @@ function exibirPopupPagamento(data) {
   iniciarContagemRegressiva(new Date(data.expires_at));
   monitorarStatusPagamento(data.id);
 }
+
 function monitorarStatusPagamento(id) {
   const intervalo = setInterval(() => {
     fetch(`https://api.abacatepay.com/v1/pixQrCode/check?id=${id}`, {
@@ -123,7 +126,7 @@ function monitorarStatusPagamento(id) {
       if (status === "PAID") {
         clearInterval(intervalo);
         alert("Pagamento confirmado!");
-        // Enviar mensagem via Discord aqui
+        enviarMensagemDiscord();
         fecharPopup();
       } else if (status === "EXPIRED") {
         clearInterval(intervalo);
@@ -133,6 +136,20 @@ function monitorarStatusPagamento(id) {
     });
   }, 5000);
 }
+
+function enviarMensagemDiscord() {
+  fetch("/api/enviarMensagemDiscord", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId: user.userId,
+      mensagem: "Pagamento confirmado! Seus cookies estão a caminho."
+    })
+  });
+}
+
 function iniciarContagemRegressiva(expiracao) {
   const tempoElemento = document.getElementById("tempo-restante");
 
@@ -151,16 +168,6 @@ function iniciarContagemRegressiva(expiracao) {
     tempoElemento.textContent = `${minutos}m ${segundos}s`;
   }, 1000);
 }
-fetch("/api/enviarMensagemDiscord", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    userId: user.userId,
-    mensagem: "Pagamento confirmado! Seus cookies estão a caminho."
-  })
-});
 
 function fecharPopup() {
   document.getElementById("popup-pagamento").classList.add("hidden");
@@ -173,25 +180,23 @@ function copiarCodigo() {
   alert("Código copiado para a área de transferência!");
 }
 
- document.addEventListener('DOMContentLoaded', () => {
-    const popups = document.querySelectorAll('.popup');
+document.addEventListener('DOMContentLoaded', () => {
+  const popups = document.querySelectorAll('.popup');
 
-    popups.forEach(popup => {
-      const card = popup.querySelector('.popup-card');
-      const closeBtn = popup.querySelector('.close-btn');
+  popups.forEach(popup => {
+    const card = popup.querySelector('.popup-card');
+    const closeBtn = popup.querySelector('.close-btn');
 
-      // Fechar ao clicar no botão "X"
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          popup.classList.add('hidden');
-        });
-      }
-
-      // Fechar ao clicar fora do .popup-card
-      popup.addEventListener('click', (e) => {
-        if (!card.contains(e.target)) {
-          popup.classList.add('hidden');
-        }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        popup.classList.add('hidden');
       });
+    }
+
+    popup.addEventListener('click', (e) => {
+      if (!card.contains(e.target)) {
+        popup.classList.add('hidden');
+      }
     });
   });
+});
