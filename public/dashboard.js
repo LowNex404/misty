@@ -1,3 +1,4 @@
+let user;
 // Carregar dados do usuário
 fetch('/api/user', { credentials: 'include' }) // envia o cookie
   .then(res => {
@@ -11,9 +12,6 @@ fetch('/api/user', { credentials: 'include' }) // envia o cookie
 
     document.getElementById('username').textContent = user.username;
     document.getElementById('avatar').src = user.avatar;
-    document.getElementById('balance').textContent = user.balance;
-    document.getElementById('level').textContent = user.level;
-    document.getElementById('xp').textContent = `${user.xp}/100`;
   })
   .catch(err => {
     console.error('Erro na requisição:', err);
@@ -95,13 +93,13 @@ function showConfirmPopup(cookies, preco) {
   const dados = await resposta.json();
 
    
-  document.getElementById("valor-pagamento").textContent = data.amount.toFixed(2);
-  document.getElementById("qr-code").src = data.qrcode_image_url;
-  document.getElementById("codigo-pix").value = data.brcode;
-  document.getElementById("popup-pagamento").classList.remove("hidden");
+  document.getElementById("valor-pagamento").textContent = dados.amount.toFixed(2);
+document.getElementById("qr-code").src = dados.qrcode_image_url;
+document.getElementById("codigo-pix").value = dados.brcode;
+document.getElementById("popup-pagamento").classList.remove("hidden");
 
-  iniciarContagemRegressiva(new Date(data.expires_at));
-  monitorarStatusPagamento(data.id);
+iniciarContagemRegressiva(new Date(dados.expires_at));
+monitorarStatusPagamento(dados.id);
 
   } catch (err) {
     console.error("Erro ao criar pagamento:", err);
