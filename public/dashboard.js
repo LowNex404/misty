@@ -112,7 +112,7 @@ function monitorarStatusPagamento(id) {
   const intervalo = setInterval(() => {
     fetch(`https://api.abacatepay.com/v1/pixQrCode/check?id=${id}`, {
       headers: {
-        "Authorization": "Bearer SEU_TOKEN"
+        "Authorization": "Bearer abc_dev_XfyPhpmk5XsyQmLUSM2Jc4EX"
       }
     })
     .then(res => res.json())
