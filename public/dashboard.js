@@ -93,3 +93,26 @@ function showConfirmPopup(cookies, preco) {
     });
   };
 }
+
+ document.addEventListener('DOMContentLoaded', () => {
+    const popups = document.querySelectorAll('.popup');
+
+    popups.forEach(popup => {
+      const card = popup.querySelector('.popup-card');
+      const closeBtn = popup.querySelector('.close-btn');
+
+      // Fechar ao clicar no botão "X"
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          popup.classList.add('hidden');
+        });
+      }
+
+      // Fechar ao clicar fora do .popup-card
+      popup.addEventListener('click', (e) => {
+        if (!card.contains(e.target)) {
+          popup.classList.add('hidden');
+        }
+      });
+    });
+  });
