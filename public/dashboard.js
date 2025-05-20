@@ -75,7 +75,7 @@ function showConfirmPopup(cookies, preco) {
 
   document.getElementById("user-id").textContent = user.userId;
   document.getElementById("user-name").textContent = user.username;
-  document.getElementById("user-saldo").textContent = user.balance || 0;
+  document.getElementById("user-saldo").textContent = user.balance.toLocaleString()|| 0;
 
   document.getElementById("popup-confirmar").classList.remove("hidden");
 
