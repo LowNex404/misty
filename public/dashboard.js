@@ -1,4 +1,3 @@
-let user = null;               // dados globais
 
 fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
   .then(res => {
@@ -7,7 +6,7 @@ fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
   })
   .then(data => {
     console.log('Dados recebidos:', data);
-    user = data;
+    const user = data;
 
     document.getElementById('username').textContent = user.username;
     document.getElementById('avatar').src            = user.avatar;
@@ -17,10 +16,10 @@ fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
   })
   .catch(() => {
     document.getElementById('username').innerHTML =
-      `<a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-hnpc.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
-         class="login-fallback">
-         <i class="fa-solid fa-right-to-bracket"></i> Fazer login
-       </a>`;
+      `<a href="https://discord.com/oauth2/authorize?client_id=1367262830776029245&response_type=code&redirect_uri=https%3A%2F%2Fmisty-bot.netlify.app%2Fauth%2Fdiscord%2Fcallback&scope=identify+email"
+          class="login-fallback" >
+        <i class="fa-solid fa-right-to-bracket"></i> Fazer login
+      </a>`;
     document.getElementById('avatar').src = 'img/default-avatar.jpg';
   });
 
