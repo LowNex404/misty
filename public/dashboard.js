@@ -6,7 +6,7 @@ fetch('/api/user', { credentials: 'include' })   // <‑‑ manda o cookie
   })
   .then(data => {
     console.log('Dados recebidos:', data);
-    const user = data;
+     user = data;
 
     document.getElementById('username').textContent = user.username;
     document.getElementById('avatar').src            = user.avatar;
